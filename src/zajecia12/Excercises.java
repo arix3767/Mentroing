@@ -7,7 +7,8 @@ import java.util.stream.Collectors;
 public class Excercises {
     public static void main(String[] args) {
 
-        task02();
+
+        task09();
     }
 
     /**
@@ -33,42 +34,67 @@ public class Excercises {
      * Wypisz, ilu jest użytkowników, którzy mają 30 lub więcej lat i zarabiają powyżej 5000 zł.
      */
     public static void task03() {
+                        createUsers().stream()
+                .filter(user -> user.getAge() >= 30)
+                .filter(user -> user.getSalary() > 5000)
+                .forEach(System.out::println);
+
+
     }
 
     /**
      * Wypisz statystyki zarobków m.in. suma, minimalne itd...
      */
     public static void task04() {
+        System.out.println(createUsers().stream()
+                .mapToDouble(User::getSalary)
+                .summaryStatistics());
+
     }
 
     /**
      * Wyświetl użytkownika o id 5, jeżeli go nie będzie, to niech wyświetli komunikat "Nie ma użytkownika o id 5".
      */
     public static void task05() {
+        createUsers().stream()
+                .filter(user -> user.getId() == 5)
+                .findAny()
+                .ifPresentOrElse(System.out::println,() -> System.out.println("Nie ma użytkownika o id 5"));
     }
 
     /**
      * Wypisz true/false w zależności od tego, czy jest jakikolwiek użytkownika w wieku 33 lat.
      */
     public static void task06() {
+        System.out.println(createUsers().stream()
+                .anyMatch(user -> user.getAge() == 33));
     }
 
     /**
      * Sprawdź, czy wszyscy użytkownicy są pełnoletni.
      */
     public static void task07() {
+        System.out.println(createUsers().stream()
+                    .allMatch(user -> user.getAge() >= 18));
     }
 
     /**
      * Stwórz listę użytkowników, którzy w swoim imieniu mają literkę "a".
      */
     public static void task08() {
+        List<User> userList = createUsers().stream()
+                .filter(user -> user.getFirstName().contains("a"))
+                .toList();
     }
 
     /**
      * Zwiększ każdemu użytkownikowi pensję o 1000 zł, a następnie wypisz o nim informacje.
      */
     public static void task09() {
+        createUsers().stream()
+                .peek(user -> user.setSalary(user.getSalary() + 1000))
+                .forEach(System.out::println);
+
     }
 
 
