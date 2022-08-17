@@ -1,0 +1,9 @@
+ala - 2
+samochod - 2
+123 - 1
+kajak - 1
+mama - 1
+ok - 1
+rower - 1
+tata - 1
+wiatrakk - 1
